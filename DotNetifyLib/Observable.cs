@@ -25,8 +25,8 @@ namespace DotNetify
    /// <summary>
    /// Base class for objects that want to provide notification if their property values changed.
    /// </summary>
-   public class Observable : INotifyPropertyChanged, IDisposable
-   {
+   public class Observable : INotifyPropertyChanged, IDisposableVM
+    {
       protected Dictionary<string, object> _propertyValues = new Dictionary<string, object>();
       protected Stack<string> _propertyChangedStack = new Stack<string>();
 

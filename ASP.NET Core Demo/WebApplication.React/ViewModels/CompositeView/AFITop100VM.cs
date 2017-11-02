@@ -22,7 +22,7 @@ namespace ViewModels.CompositeView
       /// It provides a chance for this view model to initialize them.
       /// </summary>
       /// <param name="subVM">Sub-view model instance.</param>
-      public override void OnSubVMCreated(BaseVM subVM)
+      public override void OnSubVMCreated(IBaseVM subVM)
       {
          if (subVM is FilterableMovieTableVM)
             InitMovieTableVM(subVM as FilterableMovieTableVM);

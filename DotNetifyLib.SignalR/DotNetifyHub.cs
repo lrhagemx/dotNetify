@@ -201,7 +201,7 @@ namespace DotNetify
       /// <param name="vm">View model instance.</param>
       /// <param name="data">View model data.</param>
       /// <param name="vmArg">Optional view model argument.</param>
-      private void RunVMFilters(BaseVM vm, object data, Action<object> vmAction)
+      private void RunVMFilters(IBaseVM vm, object data, Action<object> vmAction)
       {
          try
          {
@@ -221,17 +221,17 @@ namespace DotNetify
       /// <summary>
       /// Runs the filter before the view model is requested.
       /// </summary>
-      private void RunRequestingVMFilters(string vmId, BaseVM vm, object vmArg, Action<object> vmAction) => RunVMFilters(vm, vmArg, vmAction);
+      private void RunRequestingVMFilters(string vmId, IBaseVM vm, object vmArg, Action<object> vmAction) => RunVMFilters(vm, vmArg, vmAction);
 
       /// <summary>
       /// Runs the filter before the view model is updated.
       /// </summary>
-      private void RunUpdatingVMFilters(string vmId, BaseVM vm, object vmData, Action<object> vmAction) => RunVMFilters(vm, vmData, vmAction);
+      private void RunUpdatingVMFilters(string vmId, IBaseVM vm, object vmData, Action<object> vmAction) => RunVMFilters(vm, vmData, vmAction);
 
       /// <summary>
       /// Runs the filter before the view model respond to something.
       /// </summary>
-      private void RunRespondingVMFilters(string vmId, BaseVM vm, object vmData, Action<object> vmAction)
+      private void RunRespondingVMFilters(string vmId, IBaseVM vm, object vmData, Action<object> vmAction)
       {
          try
          {

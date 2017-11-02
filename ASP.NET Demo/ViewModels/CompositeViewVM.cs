@@ -67,7 +67,7 @@ namespace ViewModels
       /// This is needed if the master VM needs to perform initialization on its sub VMs prior to binding
       /// with the views.
       /// </summary>
-      public override BaseVM GetSubVM(string iVMTypeName)
+      public override IBaseVM GetSubVM(string iVMTypeName)
       {
          if (iVMTypeName == typeof(LinkedGridViewVM).Name)
             return _gridViewVM;

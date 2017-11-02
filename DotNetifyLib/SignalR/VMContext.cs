@@ -22,9 +22,9 @@ namespace DotNetify
    public class VMContext
    {
       public DotNetifyHubContext HubContext { get; }
-      public BaseVM Instance { get; }
+      public IBaseVM Instance { get; }
 
-      internal VMContext(DotNetifyHubContext hubContext, BaseVM instance)
+      internal VMContext(DotNetifyHubContext hubContext, IBaseVM instance)
       {
          HubContext = hubContext;
          Instance = instance;

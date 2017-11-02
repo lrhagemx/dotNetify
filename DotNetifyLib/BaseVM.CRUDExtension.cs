@@ -27,13 +27,13 @@ namespace DotNetify
       /// <typeparam name="T">Property type.</typeparam>
       /// <param name="expression">Expression containing property name of the list.</param>
       /// <param name="item">List item to be added.</param>
-      public static void AddList<T>(this BaseVM vm, Expression<Func<T>> expression, object item)
+      public static void AddList<T>(this IBaseVM vm, Expression<Func<T>> expression, object item)
       {
          var propName = ((MemberExpression)expression.Body).Member.Name;
          vm.AddList( propName, item );
       }
 
-      public static void AddList<T>(this BaseVM vm, string propName, T item) => vm.ChangedProperties[propName + "_add"] = item;
+      public static void AddList<T>(this IBaseVM vm, string propName, T item) => vm.ChangedProperties[propName + "_add"] = item;
 
       /// <summary>
       /// Used in CRUD operations to update an existing item on the list.
@@ -41,13 +41,13 @@ namespace DotNetify
       /// <typeparam name="T">Property type.</typeparam>
       /// <param name="expression">Expression containing property name of the list.</param>
       /// <param name="item">List item to be updated.</param>
-      public static void UpdateList<T>(this BaseVM vm, Expression<Func<T>> expression, object item)
+      public static void UpdateList<T>(this IBaseVM vm, Expression<Func<T>> expression, object item)
       {
          var propName = ((MemberExpression)expression.Body).Member.Name;
          vm.UpdateList(propName, item);
       }
 
-      public static void UpdateList<T>(this BaseVM vm, string propName, T item) => vm.ChangedProperties[propName + "_update"] = item;
+      public static void UpdateList<T>(this IBaseVM vm, string propName, T item) => vm.ChangedProperties[propName + "_update"] = item;
 
       /// <summary>
       /// Used in CRUD operations to remove an item from a list.
@@ -55,12 +55,12 @@ namespace DotNetify
       /// <typeparam name="T">Property type.</typeparam>
       /// <param name="expression">Expression containing property name of the list.</param>
       /// <param name="itemKey">Identifies the list item to be removed.</param>
-      public static void RemoveList<T>(this BaseVM vm, Expression<Func<T>> expression, object itemKey)
+      public static void RemoveList<T>(this IBaseVM vm, Expression<Func<T>> expression, object itemKey)
       {
          var propName = ((MemberExpression)expression.Body).Member.Name;
          vm.RemoveList(propName, itemKey);
       }
 
-      public static void RemoveList<T>(this BaseVM vm, string propName, T itemKey) => vm.ChangedProperties[propName + "_remove"] = itemKey;
+      public static void RemoveList<T>(this IBaseVM vm, string propName, T itemKey) => vm.ChangedProperties[propName + "_remove"] = itemKey;
    }
 }

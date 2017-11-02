@@ -5,6 +5,25 @@ using DotNetify;
 
 namespace ViewModels
 {
+    public class Test
+    {
+        private Func<string, bool> thefunc;
+
+        public Test()
+        {
+            thefunc = null;
+        }
+
+        public void SetFunc(Func<string, bool> func)
+        {
+            thefunc = func;
+        }
+
+        public bool RunFunc(string parameter)
+        {
+            return thefunc(parameter);
+        }
+    }
    /// <summary>
    /// This view model demonstrates simple CRUD operation on a list. 
    /// </summary>
@@ -12,10 +31,10 @@ namespace ViewModels
    {
       private readonly EmployeeService _employeeService;
 
-      /// <summary>
-      /// The class that holds employee info to send to the browser.  
-      /// </summary>
-      public class EmployeeInfo
+        /// <summary>
+        /// The class that holds employee info to send to the browser.  
+        /// </summary>
+        public class EmployeeInfo
       {
          public int Id { get; set; }
          public string FirstName { get; set; }
@@ -109,12 +128,17 @@ namespace ViewModels
          }
       }
 
-      /// <summary>
-      /// Constructor.
-      /// </summary>
-      /// <param name="model">Employee model.</param>
-      public SimpleListVM()
+        public Test Test { get; set; }
+
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="model">Employee model.</param>
+        public SimpleListVM()
       {
+            Test = new Test();
+
+
          // Normally this will be constructor-injected.
          _employeeService = new EmployeeService(7);
       }

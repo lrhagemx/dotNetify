@@ -18,7 +18,7 @@ namespace ViewModels
       /// <summary>
       /// Overrides this method to handle creation of view models within this master view model's scope.
       /// </summary>
-      public override BaseVM GetSubVM(string iVMTypeName, string iVMInstanceId)
+      public override IBaseVM GetSubVM(string iVMTypeName, string iVMInstanceId)
       {
          if (iVMTypeName == typeof(DashboardPanelVM).Name)
             return _PanelVM;

@@ -26,8 +26,8 @@ namespace DotNetify
    /// <summary>
    /// Base class for all DotNetify view models.  
    /// </summary>
-   public class BaseVM : Observable
-   {
+   public class BaseVM : Observable, IBaseVM, IPushVM, IMasterViewVM, IDisposableVM
+    {
       protected ConcurrentDictionary<string, object> _changedProperties = new ConcurrentDictionary<string, object>();
       private List<string> _ignoredProperties = null;
 
@@ -85,7 +85,7 @@ namespace DotNetify
       /// <param name="vmInstanceId">View model instance identifier.</param>
       /// <param name="iVMArg">View model's initialization argument.</param> 
       /// <returns>View model instance.</returns>
-      public virtual BaseVM GetSubVM(string vmTypeName, string vmInstanceId)
+      public virtual IBaseVM GetSubVM(string vmTypeName, string vmInstanceId)
       {
          return String.IsNullOrEmpty(vmInstanceId) ? GetSubVM(vmTypeName) : null;
       }
@@ -95,7 +95,7 @@ namespace DotNetify
       /// </summary>
       /// <param name="vmTypeName">View model type name.</param>
       /// <returns>View model instance.</returns>
-      public virtual BaseVM GetSubVM(string vmTypeName)
+      public virtual IBaseVM GetSubVM(string vmTypeName)
       {
          return null;
       }
@@ -116,7 +116,7 @@ namespace DotNetify
       /// Override this method to access new instances of subordinates view models as soon as they're created.
       /// </summary>
       /// <param name="subVM">Sub-view model instance.</param>
-      public virtual void OnSubVMCreated(BaseVM subVM)
+      public virtual void OnSubVMCreated(IBaseVM subVM)
       {
       }
 
@@ -124,7 +124,7 @@ namespace DotNetify
       /// Override this method to access instances of subordinates view models before they're disposed.
       /// </summary>
       /// <param name="subVM">Sub-view model instance.</param>
-      public virtual void OnSubVMDisposing(BaseVM subVM)
+      public virtual void OnSubVMDisposing(IBaseVM subVM)
       {
       }
 

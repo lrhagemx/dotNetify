@@ -33,7 +33,7 @@ namespace DotNetify
 
       void RunDisconnectionMiddlewares(HubCallerContext context);
 
-      void RunVMFilters(DotNetifyHubContext hubContext, BaseVM vm, NextFilterDelegate finalFilter);
+      void RunVMFilters(DotNetifyHubContext hubContext, IBaseVM vm, NextFilterDelegate finalFilter);
 
       Exception RunExceptionMiddleware(HubCallerContext context, Exception exception);
    }
@@ -118,7 +118,7 @@ namespace DotNetify
       /// </summary>
       /// <param name="hubContext">Hub context.</param>
       /// <param name="vm">View model instance.</param>
-      public void RunVMFilters(DotNetifyHubContext hubContext, BaseVM vm, NextFilterDelegate finalFilter)
+      public void RunVMFilters(DotNetifyHubContext hubContext, IBaseVM vm, NextFilterDelegate finalFilter)
       {
          var nextFilters = new Stack<NextFilterDelegate>();
          nextFilters.Push(finalFilter);
