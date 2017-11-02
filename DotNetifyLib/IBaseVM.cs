@@ -10,9 +10,14 @@ namespace DotNetify
 {
     public interface IBaseVM : INotifyPropertyChanged
     {
-        List<string> IgnoredProperties { get; }
+        
         ConcurrentDictionary<string, object> ChangedProperties { get; }
 
-        void OnUnresolvedUpdate(string vmPath, string value);
+        
+    }
+
+    public interface IIgnoreProperties
+    {
+        List<string> IgnoredProperties { get; }
     }
 }

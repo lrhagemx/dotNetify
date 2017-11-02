@@ -14,7 +14,7 @@ namespace DotNetify
             vm.ChangedProperties.Clear();
         }
 
-        public static void Ignore<T>(this IBaseVM vm, Expression<Func<T>> expression)
+        public static void Ignore<T>(this IIgnoreProperties vm, Expression<Func<T>> expression)
         {
             var propertyName = ((MemberExpression)expression.Body).Member.Name;
             if (!vm.IgnoredProperties.Contains(propertyName))

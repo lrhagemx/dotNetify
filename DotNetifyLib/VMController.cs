@@ -280,7 +280,10 @@ namespace DotNetify
 
                      // If the view model was recreated, include the changes that trigger this update to overwrite their initial values.
                      if (isRecreated && !vmInstance.ChangedProperties.ContainsKey(kvp.Key))
+                        {
                             vmInstance.ChangedProperties.TryAdd(kvp.Key, kvp.Value);
+                        }
+                            
                     }
                 }
 
@@ -504,8 +507,8 @@ namespace DotNetify
             {
                 // If we cannot resolve the property path, forward the info to the instance
                 // to give it a chance to resolve it.
-
-                vmInstance.OnUnresolvedUpdate(vmPath, newValue);
+                if (vmInstance is IMasterViewVM)
+                    (vmInstance as IMasterViewVM).OnUnresolvedUpdate(vmPath, newValue);
             }
         }
 
@@ -545,7 +548,8 @@ namespace DotNetify
         {
             try
             {
-                List<string> ignoredPropertyNames = data is IBaseVM ? (data as IBaseVM).IgnoredProperties : null;
+                List<string> ignoredPropertyNames = data is IIgnoreProperties ? (data as IIgnoreProperties).IgnoredProperties : 
+                    data.GetType().GetProperties().Where(i => i.GetCustomAttribute(typeof(IgnoreAttribute)) != null).ToList().ConvertAll(j => j.Name);
                 return JsonConvert.SerializeObject(data, new JsonSerializerSettings { ContractResolver = new VMContractResolver(ignoredPropertyNames) });
             }
             catch (Exception ex)
